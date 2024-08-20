@@ -1,0 +1,15 @@
+#avatar {
+  width: 150px;
+}
+
+.card {
+  display: flex;
+  justify-content: space-around;
+  width: 400px;
+  text-align: center;
+  color: rgb(43, 40, 57);
+  background-color: rgb(221, 235, 248);
+  padding: 20px;
+  margin: auto;
+  border-bottom: 5px solid rgb(216, 206, 254);
+}
