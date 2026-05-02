@@ -1,25 +1,63 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  padding: 20px;
+}
+
 .no-link-style {
   text-decoration: none;
   color: inherit;
 }
 
 #avatar {
-  width: 150px;
+  width: 190px;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 0 0 4px #a78bfa, 0 10px 28px rgba(100, 80, 200, 0.4);
+  margin-bottom: 24px;
+  display: block;
 }
 
 .card {
+  position: relative;
   display: flex;
-  justify-content: space-around;
-  width: 400px;
+  flex-direction: column;
+  align-items: center;
+  width: 460px;
+  max-width: 92vw;
   text-align: center;
-  color: rgb(43, 40, 57);
-  background-color: rgb(221, 235, 248);
-  padding: 20px;
-  margin: auto;
-  border-bottom: 5px solid rgb(216, 206, 254);
+  color: #2b2839;
+  background: linear-gradient(160deg, #ffffff 0%, #f3f0ff 100%);
+  padding: 48px 40px 40px;
+  border-radius: 24px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+}
+
+/* Gradient accent bar across the top */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #6450c8, #a78bfa, #c084fc, #a78bfa, #6450c8);
+  border-radius: 24px 24px 0 0;
 }
 
 .card.card-visible {
@@ -27,7 +65,34 @@
   transform: translateY(0);
 }
 
-/* Typewriter cursor — only shown while typing */
+.card.card-visible:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 38px 72px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.info {
+  width: 100%;
+}
+
+.info h3 {
+  font-size: 1.95rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 6px;
+  letter-spacing: -0.5px;
+}
+
+/* Tagline / typewriter */
+.tagline {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #6450c8;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  margin-bottom: 22px;
+  min-height: 1.4em;
+}
+
 .tagline.typing::after {
   content: '|';
   animation: blink 0.7s step-end infinite;
@@ -37,27 +102,67 @@
   50% { opacity: 0; }
 }
 
-/* Phone click-to-copy */
+/* Divider between tagline and description */
+.info p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: #666;
+  margin-bottom: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #e8e3ff;
+}
+
+/* Location */
+.info h4:not(.tagline) {
+  font-size: 0.85rem;
+  color: #aaa;
+  font-weight: 500;
+  margin-bottom: 22px;
+  letter-spacing: 0.2px;
+}
+
+.info h4:not(.tagline)::before {
+  content: '📍 ';
+}
+
+/* Phone — pill button */
 .phone {
+  display: inline-block;
+  background: linear-gradient(135deg, #6450c8, #a78bfa);
+  color: white;
+  padding: 14px 36px;
+  border-radius: 50px;
+  font-size: 1.05rem;
+  font-weight: 700;
   cursor: pointer;
   position: relative;
-  transition: color 0.2s ease;
   user-select: none;
+  letter-spacing: 0.5px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .phone:hover {
-  color: rgb(100, 80, 200);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(100, 80, 200, 0.5);
+  color: white;
 }
 
+.phone::after {
+  content: ' 📋';
+  font-size: 0.85rem;
+  opacity: 0.75;
+}
+
+/* Copied tooltip */
 .tooltip {
   position: absolute;
-  bottom: calc(100% + 6px);
+  bottom: calc(100% + 8px);
   left: 50%;
   transform: translateX(-50%) translateY(4px);
-  background: rgb(100, 80, 200);
+  background: #1a1a2e;
   color: white;
-  padding: 4px 10px;
-  border-radius: 4px;
+  padding: 5px 12px;
+  border-radius: 6px;
   font-size: 0.75rem;
   white-space: nowrap;
   pointer-events: none;
